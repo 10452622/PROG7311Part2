@@ -1,0 +1,23 @@
+@model PROG7311Part2.Models.Contract
+
+@{
+    ViewData["Title"] = "Delete Contract";
+}
+
+<h2>Delete Contract</h2>
+
+<div class="card">
+    <div class="card-body">
+        <h4>Are you sure you want to delete contract #@Model.ContractId?</h4>
+        <p>Client: @Model.Client?.Name</p>
+        <p>Start: @Model.StartDate.ToString("yyyy-MM-dd")</p>
+        <p>End: @Model.EndDate.ToString("yyyy-MM-dd")</p>
+        <p>Status: @Model.Status</p>
+
+        <form asp-action="Delete" asp-route-id="@Model.ContractId" method="post">
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-danger">Delete</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>

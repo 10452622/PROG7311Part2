@@ -1,0 +1,75 @@
+@model PROG7311Part2.Models.Contract
+
+@{
+    ViewData["Title"] = "Edit Contract";
+}
+
+<h2>Edit Contract</h2>
+
+@if (ViewBag.Errors != null)
+{
+    <div class="alert alert-danger">
+        <ul>
+            @foreach (var e in (List<string>)ViewBag.Errors)
+            {
+                <li>@e</li>
+            }
+        </ul>
+    </div>
+}
+
+<form asp-action="Edit" asp-route-id="@Model.ContractId" method="post">
+    @Html.AntiForgeryToken()
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <input type="hidden" asp-for="ContractId" />
+
+    <div class="form-group">
+        <label asp-for="StartDate" class="control-label">Start Date</label>
+        <input asp-for="StartDate" type="date" class="form-control" />
+        <span asp-validation-for="StartDate" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="EndDate" class="control-label">End Date</label>
+        <input asp-for="EndDate" type="date" class="form-control" />
+        <span asp-validation-for="EndDate" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Status" class="control-label">Status</label>
+        <select asp-for="Status" class="form-control">
+            <option value="Draft" selected="@(Model.Status == "Draft")">Draft</option>
+            <option value="Active" selected="@(Model.Status == "Active")">Active</option>
+            <option value="Expired" selected="@(Model.Status == "Expired")">Expired</option>
+            <option value="On Hold" selected="@(Model.Status == "On Hold")">On Hold</option>
+        </select>
+        <span asp-validation-for="Status" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ServiceLevel" class="control-label">Service Level</label>
+        <input asp-for="ServiceLevel" class="form-control" />
+        <span asp-validation-for="ServiceLevel" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ClientId" class="control-label">Client</label>
+        <select asp-for="ClientId" class="form-control" asp-items="(SelectList)ViewBag.ClientId">
+            <option value="">-- Select client --</option>
+        </select>
+        <span asp-validation-for="ClientId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label">Agreement file</label>
+        @if (!string.IsNullOrEmpty(Model.PDFAgreementFilePath))
+        {
+            <div class="mb-2"><a href="@Model.PDFAgreementFilePath" target="_blank">Current agreement</a></div>
+        }
+    </div>
+
+    <br />
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

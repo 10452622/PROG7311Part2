@@ -1,0 +1,80 @@
+:root {
+    --bg-dark: #0f1116; 
+    --text-light: #eef3f7;
+    --card-bg: #171622; 
+
+    --pastel-pink: #EFCCEA;
+    --pastel-purple: #A1A1F7;
+    --pastel-green: #89D385;
+    --pastel-lightGreen: #D1EFBD;
+    --pastel-blue: #6CD1F0;
+
+    --muted-border: rgba(255,255,255,0.06);
+
+    --very-light-pink: #fff1f6;
+}
+
+body {
+    background-color: var(--very-light-pink);
+    color: #1b1b1b;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 10px 0;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+}
+
+.btn-primary {
+    background-color: var(--pastel-purple);
+    border: none;
+    color: #1b1b1b;
+}
+
+.btn-success {
+    background-color: var(--pastel-green);
+    border: none;
+    color: #062514;
+}
+
+.btn-warning {
+    background-color: var(--pastel-lightGreen);
+    border: none;
+    color: #1b2a00; 
+}
+
+.btn-danger {
+    background-color: var(--pastel-pink);
+    border: none;
+    color: #2a0e20;
+}
+
+a { color: var(--pastel-blue); }
+
+input, select, textarea {
+    background-color: #ffffff;
+    color: #1b1b1b;
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 6px;
+    padding: 8px;
+}
+
+table {
+    background-color: #ffffff;
+    color: #1b1b1b;
+}
+
+th { background-color: var(--pastel-purple); color: #1b1b1b; }
+
+td { border-bottom: 1px solid rgba(0,0,0,0.04); }
+
+.navbar, .navbar-brand, .nav-link { color: #1b1b1b !important; }
+.navbar { background: transparent; }
+.footer { background-color: transparent; color: #1b1b1b; }
+
+.form-text.text-muted { color: rgba(0,0,0,0.6); }
+
+.card h2, .card h3 { color: #7a234a; }

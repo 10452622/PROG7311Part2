@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4" style="color: var(--pastel-pink)">Welcome</h1>
+</div>
+
+<div class="card">
+    <a asp-controller="ServiceRequests" asp-action="Create" class="btn btn-success">
+        Create Request
+    </a>
+
+    <a asp-controller="ServiceRequests" asp-action="Index" class="btn btn-primary">
+        View Requests
+    </a>
+
+    <a asp-controller="Contracts" asp-action="Index" class="btn btn-warning">
+        Manage Contracts
+    </a>
+</div>

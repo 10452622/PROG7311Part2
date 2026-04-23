@@ -1,0 +1,48 @@
+@model PROG7311Part2.Models.ServiceRequest
+
+@{
+    ViewData["Title"] = "Edit Service Request";
+}
+
+<h1>Edit Service Request</h1>
+
+<form asp-action="Edit" method="post">
+    @Html.AntiForgeryToken()
+    <input asp-for="ServiceRequestId" type="hidden" />
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="form-group">
+        <label asp-for="Description" class="control-label"></label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Cost" class="control-label"></label>
+        <input asp-for="Cost" class="form-control" step="0.01" />
+        <span asp-validation-for="Cost" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Status" class="control-label"></label>
+        <input asp-for="Status" class="form-control" />
+        <span asp-validation-for="Status" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ContractId" class="control-label">Contract</label>
+        <select asp-for="ContractId" asp-items="ViewBag.ContractId" class="form-control">
+            <option value="">-- select --</option>
+        </select>
+        <span asp-validation-for="ContractId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PDFAttachmentFilePath" class="control-label"></label>
+        <input asp-for="PDFAttachmentFilePath" class="form-control" readonly />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

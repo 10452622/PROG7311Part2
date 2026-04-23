@@ -1,0 +1,93 @@
+@model IEnumerable<PROG7311Part2.Models.Contract>
+
+@{
+    ViewData["Title"] = "Manage Contracts";
+}
+
+<div class="card">
+    <h2>Manage Contracts</h2>
+
+    <p class="text-muted">Total contracts in DB: @ViewBag.TotalContracts; Matching filters: @ViewBag.MatchedContracts</p>
+
+    <form method="get" asp-action="Index" class="row g-3 mb-3">
+        <div class="col-md-3">
+            <label class="form-label">Status</label>
+            <select name="status" class="form-select">
+                <option value="">All</option>
+                <option value="Draft" selected="@(ViewBag.CurrentStatus == "Draft")">Draft</option>
+                <option value="Active" selected="@(ViewBag.CurrentStatus == "Active")">Active</option>
+                <option value="Expired" selected="@(ViewBag.CurrentStatus == "Expired")">Expired</option>
+                <option value="On Hold" selected="@(ViewBag.CurrentStatus == "On Hold")">On Hold</option>
+            </select>
+        </div>
+
+        <div class="col-md-3">
+            <label class="form-label">Start date (from)</label>
+            <input type="date"
+                   name="startDate"
+                   value="@ViewBag.StartDate"
+                   class="form-control" />
+        </div>
+
+        <div class="col-md-3">
+            <label class="form-label">End date (to)</label>
+            <input type="date"
+                   name="endDate"
+                   value="@ViewBag.EndDate"
+                   class="form-control" />
+        </div>
+
+        <div class="col-md-3 d-flex align-items-end">
+            <button type="submit" class="btn btn-primary me-2">Filter</button>
+            <a asp-action="Index" class="btn btn-secondary">Reset</a>
+        </div>
+    </form>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Contract #</th>
+                <th>Client</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Status</th>
+                <th>Service Level</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.ContractId</td>
+                        <td>@(item.Client?.Name ?? "-")</td>
+                        <td>@item.StartDate.ToString("yyyy-MM-dd")</td>
+                        <td>@item.EndDate.ToString("yyyy-MM-dd")</td>
+                        <td>@item.Status</td>
+                        <td>@item.ServiceLevel</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.ContractId" class="btn btn-sm btn-warning">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@item.ContractId" class="btn btn-sm btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="7" class="text-center">No contracts found</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <h4>All contracts (debug)</h4>
+    <ul>
+        @foreach (var c in (IEnumerable<PROG7311Part2.Models.Contract>)ViewBag.AllContracts)
+        {
+            <li>@c.ContractId - @c.Client?.Name - @c.Status - @c.StartDate.ToString("yyyy-MM-dd") - @c.EndDate.ToString("yyyy-MM-dd")</li>
+        }
+    </ul>
+</div>

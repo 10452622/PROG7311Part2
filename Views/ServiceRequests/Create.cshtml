@@ -1,0 +1,25 @@
+@model PROG7311Part2.Models.ServiceRequest
+
+@{
+    ViewData["Title"] = "Create Service Request";
+    var clientId = Context.Request.Query["clientId"].FirstOrDefault();
+}
+
+@await Html.PartialAsync("~/Views/Shared/CreateV.cshtml", Model)
+
+@section Scripts {
+    <script>
+        const clientId = '@clientId';
+        if (clientId) {
+            document.addEventListener('DOMContentLoaded', function() {
+                const select = document.querySelector('select[name="ContractId"]');
+                if (select) {
+                    for (const opt of select.options) {
+                        if (opt.text.includes(' - ')) {
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+}
